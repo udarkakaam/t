@@ -1,4 +1,4 @@
-name: Kaali-Linux
+name: on-on
 
 on:
     push:
@@ -17,17 +17,17 @@ jobs:
          with:
             all_but_latest: true
             access_token: ${{ github.token }}
-       - name: initialization kaali-linux
+       - name: initialization
          continue-on-error: true
          run: |
-           git config --global user.name ${{ secrets.GIT_NAME }}
+           git config --global user.name udarkakaam
            git config --global user.email ${{ secrets.GIT_EMAIL }}
            git config --global credential.helper store
-           echo "https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
+           echo "https://udarkakaam:${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
        - name: cloning repository
          continue-on-error: true
          run: |
-           git clone https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@${{ secrets.BOT_REPO }} kaali
+           git clone https://udarkakaam:${{ secrets.GIT_TOKEN }}@github.com/udarkakaam/s kaali
        - name: running kaali-linux server
          timeout-minutes: 350
          continue-on-error: true
@@ -40,7 +40,7 @@ jobs:
          run: |
               git clone https://github.com/${GITHUB_REPOSITORY} loop
               cd loop || exit 1
-              echo $(date -u +%T%P) >> loop.txt
-              git add loop.txt
-              git commit -m "Kaali-Linux : Loop $(date -u +%D-%T%P)"
-              git push -q https://${{ secrets.GIT_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:kaali-linux
+              echo $(date -u +%T%P) >> online.txt
+              git add online.txt
+              git commit -m "Last $(date -u +%D-%T%P)"
+              git push -q https://${{ secrets.GIT_TOKEN_2 }}@github.com/${GITHUB_REPOSITORY} HEAD:main
